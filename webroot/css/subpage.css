@@ -1,0 +1,14 @@
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 3px solid gray;
+}
+
+.container.main-content {
+    padding-top: 50px;
+}
+
+.content-area {
+    padding: 30px 100px 100px;
+}
