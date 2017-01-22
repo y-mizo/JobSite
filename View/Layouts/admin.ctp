@@ -35,6 +35,10 @@
                     <li><?php echo $this->Html->link(__('HOME'), array('controller' => 'admins', 'action' => 'index')); ?></li>
                     <li><?php echo $this->Html->link(__('USER INDEX'), array('controller' => 'users', 'action' => 'index')); ?></li>
                     <li><?php echo $this->Html->link(__('NOTICE INDEX'), array('controller' => 'notices', 'action' => 'index')); ?></li>
+                    <li><?php echo $this->Html->link(__('JOB INDEX'), array('controller' => 'jobs', 'action' => 'index')); ?></li>
+                    <?php if ($currentUser['role'] === 'admin') : ?>
+                        <li><?php echo $this->Html->link(__('CATEGORY INDEX'), array('controller' => 'categories', 'action' => 'index')); ?></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         <!--</div>-->
