@@ -45,7 +45,7 @@
                                 <?= $this->Time->format($job['Job']['modified'], '%Y/%m/%d'); ?>
                             </td>
                             <td>
-                                <?= $job['Job']['category_id']; ?>
+                                <?= $job['Category']['name']; ?>
                             </td>
                             <td>
                                 <?= $job['Job']['title']; ?>

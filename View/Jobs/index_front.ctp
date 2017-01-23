@@ -26,6 +26,7 @@
                     <tr>
                         <th>掲載日</th>
                         <th>最終更新日</th>
+                        <th>カテゴリ</th>
                         <th>タイトル</th>
                         <th>内容</th>
                         
@@ -41,6 +42,9 @@
 
                             <td>
                                 <?= $this->Time->format($job['Job']['modified'], '%Y/%m/%d'); ?>
+                            </td>
+                            <td>
+                                <?= $job['Category']['name']; ?>
                             </td>
                             <td>
                                 <?= $job['Job']['title']; ?>

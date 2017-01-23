@@ -12,6 +12,10 @@
             <td><?= h($job['Job']['modified']); ?></td>
         </tr>
         <tr>
+            <td><strong>カテゴリ</strong></td>
+            <td><?= h($job['Category']['name']); ?></td>
+        </tr>
+        <tr>
             <td><strong>タイトル</strong></td>
             <td><?= h($job['Job']['title']); ?></td>
         </tr>

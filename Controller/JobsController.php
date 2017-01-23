@@ -2,7 +2,7 @@
 
 class JobsController extends AppController {
 
-    public $uses = ['Category', 'Job'];
+    public $uses = ['Job', 'Category'];
       
     public $components = [
         'Paginator' => [
@@ -60,25 +60,34 @@ class JobsController extends AppController {
         $this->set('job', $job);
     }
     
+    private function getCategoryList() {
+        return $this->Category->find('list', array( 
+            'fields' => array(
+                'id', 'name'
+        )));        
+    }
+    
     public function add() {
-            $this->set('category_list', $this->Category->find('list', array( 
-                'fields' => array(
-                    'id', 'name'
-            ))));
-            
+        
+
         if ($this->request->is('post')) {
             $this->Job->create();
+                    
             if ($this->Job->save($this->request->data)) {
+//                var_dump($this->request->data);
+//        exit;
                 $this->Flash->success('登録しました');
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Flash->error('失敗しました。もう一度トライしてください。');
             }
         }
+        $this->set('category_list', $this->getCategoryList());
         
     }
     
     public function edit($id = null) {
+        
         
         if (!$this->Job->exists($id)) {
             throw new NotFoundException('見つかりません');
@@ -94,7 +103,7 @@ class JobsController extends AppController {
             $options = array('conditions' => array('Job.' . $this->Job->primaryKey => $id));
             $this->request->data = $this->Job->find('first', $options);
         }
-        
+        $this->set('category_list', $this->getCategoryList());
     }
     
     public function delete($id = null) {
@@ -111,9 +120,4 @@ class JobsController extends AppController {
         return $this->redirect(array('action' => 'index'));
         
     }
-    
-    
-    
-    
-    
 }

@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <td><strong>カテゴリ</strong></td>
-            <td><?= h($job['Job']['category_id']); ?></td>
+            <td><?= h($job['Category']['name']); ?></td>
         </tr>
         <tr>
             <td><strong>タイトル</strong></td>
