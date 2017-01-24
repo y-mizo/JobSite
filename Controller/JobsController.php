@@ -5,8 +5,9 @@ App::uses('CakeEmail', 'Network/Email');
 
 class JobsController extends AppController {
     
+    
 
-    public $uses = ['Job', 'Category'];
+    public $uses = ['Job', 'Category', 'Job_entry'];
       
     public $components = [
         'Session',
@@ -36,7 +37,7 @@ class JobsController extends AppController {
 //        $this->Job->recursive = 0;
 //        var_dump($this->Paginator->paginate());
 //        exit;
-        $this->set('jobs', $this->Paginator->paginate('Job'));
+//        $this->set('jobs', $this->Paginator->paginate('Job'));
         
     }
     
@@ -126,28 +127,34 @@ class JobsController extends AppController {
         
     }
     
+
     // エントリー
     public function entry($id = null) {
-        // 仕事情報を読み込み
         $this->layout = 'front';
-                if (!$this->Job->exists($id)) {
+        
+        // 仕事情報を読み込み
+
+        if (!$this->Job->exists($id)) {
             throw new NotFoundException('見つかりません');
         }
         $job = $this->Job->findById($id);
 //        $this->set('job_description', nl2br($job['Job']['description']));  // 改行表示
         $this->set('job', $job);
         // ここまで
-        
+//        
         if ($this->request->is('post')) {
-            $this->Job->set($this->request->data);
+            $this->Job_entry->set($this->request->data);
 
-//            if (!$this->Job->validates()) {
-//                return;
-//            }
+            if (!$this->Job_entry->validates()) {
+            
+                return;
+                
+            } else {
             // TODO: フォームの内容をセッションに保存
             $this->Session->write('data', $this->request->data);
             // リダイレクト
             $this->redirect(array('action' => 'entry_confirm'));
+            }
         }
         // もしセッションに値がセットされていたら読み込む。修正用。
         $this->request->data = $this->Session->read('data');
