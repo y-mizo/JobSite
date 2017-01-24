@@ -25,5 +25,5 @@
         </tr>
 
 </table>
-    エントリーする
 </div>
+<?php echo $this->Html->link('エントリーする', ['controller' => 'jobs', 'action' => 'entry', $job['Job']['id'], 'label' => false]); ?>
