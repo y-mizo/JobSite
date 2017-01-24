@@ -1,3 +1,5 @@
+
+
 <head>
     <title>
         <?php $this->assign('title', 'Jobs index'); ?>

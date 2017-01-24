@@ -1,13 +1,13 @@
 <head>
     <title>
-        <?php $this->assign('title', 'Categorys index'); ?>
+        <?php $this->assign('title', 'Job Categorys index'); ?>
     </title>
 </head>
 
 
 <!--<div class="container">-->
     <div>
-        <h2>カテゴリ一覧</h2>
+        <h2>ジョブカテゴリ一覧</h2>
         <p>最終更新日時順でソートされます。</p>
                     <?php // if ($currentUser) : ?>
                         <?= $this->Html->link(

@@ -13,7 +13,7 @@ class JobsController extends AppController {
         'Session',
         'Paginator' => [
             'limit' => 5,
-            'order' => ['id' => 'asc']
+            'order' => ['modified' => 'desc']
         ]
     ];
     
@@ -37,7 +37,7 @@ class JobsController extends AppController {
 //        $this->Job->recursive = 0;
 //        var_dump($this->Paginator->paginate());
 //        exit;
-//        $this->set('jobs', $this->Paginator->paginate('Job'));
+        $this->set('jobs', $this->Paginator->paginate('Job'));
         
     }
     
@@ -133,7 +133,6 @@ class JobsController extends AppController {
         $this->layout = 'front';
         
         // 仕事情報を読み込み
-
         if (!$this->Job->exists($id)) {
             throw new NotFoundException('見つかりません');
         }
@@ -141,32 +140,34 @@ class JobsController extends AppController {
 //        $this->set('job_description', nl2br($job['Job']['description']));  // 改行表示
         $this->set('job', $job);
         // ここまで
-//        
-        if ($this->request->is('post')) {
+//        echo "000<br>";
+        // バリデーション後に戻ってきた時、情報はpostではなくputになるため、両方定義する
+        if ($this->request->is(['post', 'put'])) {
+//            echo "123<br>";
             $this->Job_entry->set($this->request->data);
 
             if (!$this->Job_entry->validates()) {
-            
+//            echo "456<br>";
                 return;
                 
             } else {
-            // TODO: フォームの内容をセッションに保存
-            $this->Session->write('data', $this->request->data);
-            // リダイレクト
-            $this->redirect(array('action' => 'entry_confirm'));
+                // TODO: フォームの内容をセッションに保存
+                $this->Session->write('data', $this->request->data);
+                // リダイレクト
+                $this->redirect(array('action' => 'entry_confirm'));
             }
+            
         }
         // もしセッションに値がセットされていたら読み込む。修正用。
         $this->request->data = $this->Session->read('data');
         // 『フォームに入力後確認ページから戻る→別ページへ移動→入力ページを再表示』を行うと、
         // 入力された内容がフォームに残ってしまうため、ここでセッションを破棄する
         $this->Session->delete('data');
-        
+
     }
     
     public function entry_confirm($id = null) {
         $this->layout = 'front';
-
         
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
@@ -193,9 +194,6 @@ class JobsController extends AppController {
             $Email->Config('to_job_customer')
                     ->to($content['email'])
                     ->send();
-            // フラッシュメッセージを出すならここで
-            // $this->Flash->success('送信できました');
-            // リダイレクト
             return $this->redirect(array('action' => 'entry_complete'));
         }
         
