@@ -8,5 +8,24 @@ class Job extends AppModel {
             'className'     => 'Category',
             'foreign_key' => 'category_id',
         )  
-    );  
+    );
+    
+
+    public $validate = array(
+        'title' => array(
+            'notBlank' => array(
+                'rule' => array('notBlank'),
+                'message' => '未入力です。',
+                'required' => true,
+            ),
+        ),
+        'description' => array(
+            'notBlank' => array(
+                'rule' => array('notBlank'),
+                'message' => '未入力です。',
+                'required' => true,
+            ),
+        ),
+    );
+    
 }
