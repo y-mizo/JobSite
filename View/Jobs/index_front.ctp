@@ -18,8 +18,14 @@
 <!--    <div>-->
 <div class="container">
     <div class="row">
+        <?php if ($this->request->data) : ?>
+        <h1 style="text-align: center"><?php echo '※検索結果の一覧です※'; ?></h1>
+        <?php endif; ?>
         <h2>おしごと一覧</h2>
         <p>最終更新日時順でソートされます。</p>
+        <p><?= $this->Html->link(
+                'お仕事検索はこちら',
+                ['action' => 'search']); ?></p>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -67,8 +73,10 @@
                 'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
             ));
             ?> -->
-        <div style="text-align: center">                         
-            <?= $this->element('pagination'); ?>                                        
+        <div style="text-align: center">
+            <?php if (!$this->request->data) : ?>
+                <?= $this->element('pagination'); ?>         
+            <?php endif; ?>
         </div> 
     </div>
 </div>

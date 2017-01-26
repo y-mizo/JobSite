@@ -42,6 +42,20 @@ class JobsController extends AppController {
     public function index_front() {
         $this->layout = 'front';
         $this->set('jobs', $this->Paginator->paginate('Job'));
+        
+        //検索用の設定
+        if ($this->request->is(['post', 'put'])){
+            //Formのtitleの値を取得
+            $title = $this->request->data['Search']['title'];
+
+            $this->Paginator->settings = array(
+                'conditions' => array(
+                    'title like' => '%'.$title.'%')
+                );
+            $data = $this->Paginator->paginate('Job');
+            // 上でsetしたのと同じように jobs にsetすることで一覧で表示できる。
+            $this->set('jobs',$data);
+        }
     }
     
     public function view($id = null) {
@@ -114,6 +128,11 @@ class JobsController extends AppController {
             $this->Flash->error('削除できませんでした、もう一度トライしてください');
         }
         return $this->redirect(array('action' => 'index'));
+        
+    }
+    
+    public function search() {
+        $this->layout = 'front';
         
     }
 
