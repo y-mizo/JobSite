@@ -5,9 +5,7 @@ App::uses('CakeEmail', 'Network/Email');
 
 class JobsController extends AppController {
     
-    
-
-    public $uses = ['Job', 'Category', 'Job_entry'];
+    public $uses = ['Job', 'Category', 'JobEntry'];
       
     public $components = [
         'Session',
@@ -20,7 +18,7 @@ class JobsController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->layout = 'admin';
-        $this->Auth->allow('logout', 'view_front', 'entry', 'entry_confirm', 'entry_complete');
+        $this->Auth->allow('index_front', 'view_front', 'search');
     }
     
     public function isAuthorized($user) {
@@ -38,13 +36,12 @@ class JobsController extends AppController {
 //        var_dump($this->Paginator->paginate());
 //        exit;
         $this->set('jobs', $this->Paginator->paginate('Job'));
-        
+              
     }
     
     public function index_front() {
         $this->layout = 'front';
-        $this->set('jobs', $this->Paginator->paginate());
-        
+        $this->set('jobs', $this->Paginator->paginate('Job'));
     }
     
     public function view($id = null) {
@@ -64,13 +61,6 @@ class JobsController extends AppController {
         $job = $this->Job->findById($id);
         $this->set('job_description', nl2br($job['Job']['description']));  // 改行表示
         $this->set('job', $job);
-    }
-    
-    private function getCategoryList() {
-        return $this->Category->find('list', array( 
-            'fields' => array(
-                'id', 'name'
-        )));        
     }
     
     public function add() {
@@ -126,86 +116,14 @@ class JobsController extends AppController {
         return $this->redirect(array('action' => 'index'));
         
     }
+
+    // ---------- private --------------
     
-
-    // エントリー
-    public function entry($id = null) {
-        $this->layout = 'front';
-        
-        // 仕事情報を読み込み
-        if (!$this->Job->exists($id)) {
-            throw new NotFoundException('見つかりません');
-        }
-        $job = $this->Job->findById($id);
-//        $this->set('job_description', nl2br($job['Job']['description']));  // 改行表示
-        $this->set('job', $job);
-        // ここまで
-//        echo "000<br>";
-        // バリデーション後に戻ってきた時、情報はpostではなくputになるため、両方定義する
-        if ($this->request->is(['post', 'put'])) {
-//            echo "123<br>";
-            $this->Job_entry->set($this->request->data);
-
-            if (!$this->Job_entry->validates()) {
-//            echo "456<br>";
-                return;
-                
-            } else {
-                // TODO: フォームの内容をセッションに保存
-                $this->Session->write('data', $this->request->data);
-                // リダイレクト
-                $this->redirect(array('action' => 'entry_confirm'));
-            }
-            
-        }
-        // もしセッションに値がセットされていたら読み込む。修正用。
-        $this->request->data = $this->Session->read('data');
-        // 『フォームに入力後確認ページから戻る→別ページへ移動→入力ページを再表示』を行うと、
-        // 入力された内容がフォームに残ってしまうため、ここでセッションを破棄する
-        $this->Session->delete('data');
-
+    private function getCategoryList() {
+        return $this->Category->find('list', array( 
+            'fields' => array(
+                'id', 'name'
+        )));        
     }
     
-    public function entry_confirm($id = null) {
-        $this->layout = 'front';
-        
-        // セッションが空ならリダイレクト
-        if (!$this->Session->read('data')) {
-            $this->redirect(array('action' => 'entry'));
-        }
-        // セッションからフォームの内容を読み込み
-        $data = $this->Session->read('data');
-        $this->set('data', $this->Session->read('data'));
-
-        if ($this->request->is('post')) {
-            //セッションの情報を取得
-            $content = ['id' => $data['Job_entry']['id'],
-                'title' => $data['Job_entry']['title'],
-                'name' => $data['Job_entry']['name'],
-                'email' => $data['Job_entry']['email']];
-            
-            // ここでメール送信
-            $Email = new CakeEmail('gmail');
-            // 管理者用
-            $Email->Config('to_job_admin')
-                    ->viewVars($content)
-                    ->send();
-            // 利用者用
-            $Email->Config('to_job_customer')
-                    ->to($content['email'])
-                    ->send();
-            return $this->redirect(array('action' => 'entry_complete'));
-        }
-        
-    }
-    
-    public function entry_complete() {
-        $this->layout = 'front';
-        // セッションが空ならリダイレクト
-        if (!$this->Session->read('data')) {
-            $this->redirect(array('action' => 'entry'));
-        }
-        // セッションのクリアはここで
-        $this->Session->delete('data');
-    }
 }

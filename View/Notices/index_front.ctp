@@ -23,7 +23,6 @@
                         <th>掲載日</th>
                         <th>最終更新日</th>
                         <th>タイトル</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -38,9 +37,10 @@
                                 <?= $this->Time->format($notice['Notice']['modified'], '%Y/%m/%d'); ?>
                             </td>
                             <td>
-                                <?= $notice['Notice']['subject']; ?>
+                                <?= $this->Html->link(
+                                    $notice['Notice']['subject'],
+                                    ['action' => 'view_front', $notice['Notice']['id']]); ?>
                             </td>
-
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -1,7 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 
-class Job_entry extends AppModel {
+class JobEntry extends AppModel {
     
     public $useTable = false;
 

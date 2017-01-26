@@ -6,7 +6,8 @@ class Job extends AppModel {
     public $belongsTo = array(
         'Category' => array(
             'className'     => 'Category',
-            'foreign_key' => 'category_id',
+            // 'foreign_key' => 'category_id',
+            // https://book.cakephp.org/2.0/ja/models/associations-linking-models-together.html
         )  
     );
     

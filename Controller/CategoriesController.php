@@ -30,24 +30,11 @@ class CategoriesController extends AppController {
     ];
     
     public function index() {
-        $this->set('categories', $this->Paginator->paginate());
+        $this->set('categories', $this->Paginator->paginate('Category'));
 
         
     }
-//    
-//    public function view($id = null) {
-//        if (!$this->Category->exists($id)) {
-//            throw new NotFoundException('お知らせは見つかりません');
-//        }
-//        $category = $this->Category->findById($id);
-////        echo var_dump($category); 
-////        echo nl2br($category['Category']['body']);
-////        exit;
-//        $this->set('category_body', nl2br($category['Category']['body']));  // 改行表示
-//        $this->set('category', $category);
-//        
-//    }
-//    
+  
     public function add() {
         if ($this->request->is('post')) {
 //            $this->request->data['Category']['body'] = nl2br($this->request->data['Category']['body']);
