@@ -45,14 +45,26 @@ class JobsController extends AppController {
         
         //検索用の設定
         if ($this->request->is(['post', 'put'])){
-            //Formのtitleの値を取得
-            $title = $this->request->data['Search']['title'];
-
-            $this->Paginator->settings = array(
-                'conditions' => array(
-                    'title like' => '%'.$title.'%')
-                );
-            $data = $this->Paginator->paginate('Job');
+            //Formのkeywordの値を取得
+            $keyword = $this->request->data['Search']['keyword'];
+            
+            // ページネータを使う(タイトル検索のみ)
+//            $this->Paginator->settings = array(
+//                'conditions' => array(
+//                    'title like' => '%' . $keyword . '%'
+//                ));
+//            $data = $this->Paginator->paginate('Job');
+            
+            // findで2カラム中から検索      
+            $data = $this->Job->find('all', [
+                'conditions' => [
+                    'OR' => [
+                        'Job.title LIKE' => '%'. $keyword. '%',
+                        'Job.description LIKE' => '%'. $keyword. '%',
+                    ],
+                ]
+            ]);
+              
             // 上でsetしたのと同じように jobs にsetすることで一覧で表示できる。
             $this->set('jobs',$data);
         }

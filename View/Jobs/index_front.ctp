@@ -13,19 +13,21 @@
 <h2>Jobs</h2>
 <?php $this->end(); ?>
 
-
-<!--<div class="container">-->
-<!--    <div>-->
 <div class="container">
     <div class="row">
         <?php if ($this->request->data) : ?>
-        <h1 style="text-align: center"><?php echo '※検索結果の一覧です※'; ?></h1>
-        <?php endif; ?>
-        <h2>おしごと一覧</h2>
-        <p>最終更新日時順でソートされます。</p>
-        <p><?= $this->Html->link(
+            <h1 style="text-align: center"><?php echo '※検索結果の一覧です※'; ?></h1>
+            <p><?= $this->Html->link(
+                '検索ページに戻る',
+                ['action' => 'search']); ?></p>           
+        <?php else : ?>
+            <h2>おしごと一覧</h2>
+            <p>最終更新日時順でソートされます。</p>
+            <p><?= $this->Html->link(
                 'お仕事検索はこちら',
                 ['action' => 'search']); ?></p>
+        <?php endif; ?>
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -34,8 +36,7 @@
                         <th>最終更新日</th>
                         <th>カテゴリ</th>
                         <th>タイトル</th>
-                        <th>内容</th>
-                        
+                        <th>内容</th>                      
                     </tr>
                 </thead>
                         <tbody>
