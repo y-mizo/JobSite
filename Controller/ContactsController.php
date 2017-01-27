@@ -14,6 +14,7 @@ class ContactsController extends AppController {
     }
 
     public function contact() {
+        $this->layout = 'front';
         if ($this->request->is('post')) {
             $this->Contact->set($this->request->data);
 
@@ -33,6 +34,7 @@ class ContactsController extends AppController {
     }
 
     public function confirm() {
+        $this->layout = 'front';
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
             $this->redirect(array('action' => 'contact'));
@@ -64,6 +66,7 @@ class ContactsController extends AppController {
     }
 
     public function complete() {
+        $this->layout = 'front';
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
             $this->redirect(array('action' => 'contact'));

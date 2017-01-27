@@ -5,6 +5,7 @@ class NoticesController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->layout = 'admin';
+        $this->Auth->allow('view_front');
     }
     
     public function isAuthorized($user) {
@@ -43,6 +44,17 @@ class NoticesController extends AppController {
 //        echo var_dump($notice); 
 //        echo nl2br($notice['Notice']['body']);
 //        exit;
+        $this->set('notice_body', nl2br($notice['Notice']['body']));  // 改行表示
+        $this->set('notice', $notice);
+        
+    }
+    
+    public function view_front($id = null) {
+            $this->layout = 'front';
+        if (!$this->Notice->exists($id)) {
+            throw new NotFoundException('お知らせは見つかりません');
+        }
+        $notice = $this->Notice->findById($id);
         $this->set('notice_body', nl2br($notice['Notice']['body']));  // 改行表示
         $this->set('notice', $notice);
         

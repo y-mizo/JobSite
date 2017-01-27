@@ -18,7 +18,9 @@
             <li><?= $this->Html->link('Page2', ['controller' => 'pages', 'action' => 'page2']); ?></li>
             <li><?= $this->Html->link('Page3', ['controller' => 'pages', 'action' => 'page3']); ?></li>
             <li><?= $this->Html->link('Notices', ['controller' => 'notices', 'action' => 'index_front']); ?></li>
+            <li><?= $this->Html->link('Job', ['controller' => 'jobs', 'action' => 'index_front']); ?></li>
             <li><?= $this->Html->link('Contact', ['controller' => 'contacts', 'action' => 'contact']); ?></li>
+            
         </ul>
 
         <!--dropdown list-->                  
