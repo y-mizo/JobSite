@@ -9,16 +9,15 @@ class ContactsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->layout = 'basic';
+        $this->layout = 'default';
         $this->Auth->allow('contact', 'confirm', 'complete');
     }
 
     public function contact() {
-        $this->layout = 'front';
         if ($this->request->is('post')) {
             $this->Contact->set($this->request->data);
 
-            if (!$this->Contact->validates()) {
+            if (!$this->Contact->validates()) {               
                 return;
             }
             // TODO: フォームの内容をセッションに保存
@@ -34,7 +33,6 @@ class ContactsController extends AppController {
     }
 
     public function confirm() {
-        $this->layout = 'front';
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
             $this->redirect(array('action' => 'contact'));
@@ -66,7 +64,6 @@ class ContactsController extends AppController {
     }
 
     public function complete() {
-        $this->layout = 'front';
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
             $this->redirect(array('action' => 'contact'));

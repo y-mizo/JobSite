@@ -1,0 +1,16 @@
+body {
+    margin-top: 65px;
+}
+
+#content {
+    margin-bottom: 80px;
+}
+
+.sidebar {
+    /*height: 100vh;*/
+    /*border-right: 2px dotted gray;*/
+    /*padding-top: 15px;*/
+}
+.main {
+    /*padding: 0px 40px;*/
+}

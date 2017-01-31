@@ -1,5 +1,21 @@
+<?php $this->assign('title', 'お知らせ'); ?>
+
+<?php $this->start('css'); ?>
+    <style>
+        header.jumbotron {
+            background-color: orange;
+        }
+    </style>
+<?php $this->end(); ?>
+    
+<header class="jumbotron">
+    <div class="container">
+        <h1>Notices</h1>
+    </div>
+</header>
+
 <div class="container">
-    <h2>お知らせ詳細</h2>
+    <h1><?= $notice['Notice']['subject']; ?></h1>
     <div class="table-responsive">
         <table class="table table-striped">
             <!--style="width: 50%;"-->
@@ -10,10 +26,6 @@
             <tr>
                 <td><strong>最終更新日</strong></td>
                 <td><?= h($notice['Notice']['modified']); ?></td>
-            </tr>
-            <tr>
-                <td><strong>タイトル</strong></td>
-                <td><?= $notice['Notice']['subject']; ?></td>
             </tr>
             <tr>
                 <td><strong>内容</strong></td>

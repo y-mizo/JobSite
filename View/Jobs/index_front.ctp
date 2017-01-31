@@ -1,46 +1,42 @@
-<?php $this->assign('title', 'Jobs index'); ?>
-<?php $this->start('css'); ?>
-<style>
-    header.jumbotron {
-        background-color: green;
-        /*background: url("../img/p2.jpg");*/
-    }
-</style>
-<?= $this->Html->css('pages'); ?>
-<?php $this->end(); ?>
-
-<?php $this->start('title_area'); ?>
-<h2>Jobs</h2>
-<?php $this->end(); ?>
+<?php $this->assign('title', 'お仕事情報'); ?>
+<?php echo $this->element('Jobs/header-setting'); ?>
 
 <div class="container">
+    <div class="row" style="text-align: right">
+        <?php echo $this->Form->create('Search', array('class' => 'form-horizontal', 'url' => 'index_front', 'class' => 'form-inline')); ?>
+        <div class="form-group">
+        <?php echo $this->Form->input('keyword', ['class' => 'form-control', 'placeholder' => 'キーワード検索', 'label' => false]); ?>
+        </div>
+        <div class="form-group">
+        <?= $this->Form->input('検索', ['action'=> 'index_front', 'type' => 'submit', 'class' => 'btn btn-primary', 'label' => false]); ?>
+        </div>
+        <?php echo $this->Form->end(); ?>
+    </div>
     <div class="row">
         <?php if ($this->request->data) : ?>
-            <h1 style="text-align: center"><?php echo '※検索結果の一覧です※'; ?></h1>
-            <p><?= $this->Html->link(
-                '検索ページに戻る',
-                ['action' => 'search']); ?></p>           
+        <h1><?php echo '『'. $this->request->data['Search']['keyword']. '』'. 'の検索結果です'; ?></h1>
+            <p><?php // echo $this->Html->link(
+//                '検索ページに戻る',
+//                ['action' => 'search']); ?></p>           
         <?php else : ?>
-            <h2>おしごと一覧</h2>
-            <p>最終更新日時順でソートされます。</p>
-            <p><?= $this->Html->link(
-                'お仕事検索はこちら',
-                ['action' => 'search']); ?></p>
+            <h1>登録お仕事一覧</h1>
+            <p>各項目クリックでソートできます。</p>
+            <p><?php // echo $this->Html->link(
+//                'お仕事検索はこちら',
+//                ['action' => 'search']); ?></p>
         <?php endif; ?>
 
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>掲載日</th>
-                        <th>最終更新日</th>
-                        <th>カテゴリ</th>
-                        <th>タイトル</th>
-                        <th>内容</th>                      
+                        <th><?php echo $this->Paginator->sort('created', '掲載日'); ?></th>
+                        <th><?php echo $this->Paginator->sort('modified', '修正日'); ?></th>
+                        <th><?php echo $this->Paginator->sort('category_id', 'カテゴリ'); ?></th>
+                        <th><?php echo $this->Paginator->sort('title', 'タイトル'); ?></th>                
                     </tr>
                 </thead>
-                        <tbody>
-
+                <tbody>
                     <?php foreach ($jobs as $job) : ?>
                         <tr>
                             <td>
@@ -54,16 +50,11 @@
                                 <?= $job['Category']['name']; ?>
                             </td>
                             <td>
-                                <?= $job['Job']['title']; ?>
-                            </td>
-                            <td>
                                 <?= $this->Html->link(
-                                    '詳細',
+                                    $job['Job']['title'],
                                     ['action' => 'view_front', $job['Job']['id']]); ?>
-                            </td>
-                            
-                        </tr>
-                        
+                            </td>                            
+                        </tr>                        
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -75,9 +66,10 @@
             ));
             ?> -->
         <div style="text-align: center">
-            <?php if (!$this->request->data) : ?>
+            <?php // if (!$this->request->data) : ?>
                 <?= $this->element('pagination'); ?>         
-            <?php endif; ?>
+            <?php // endif; ?>
         </div> 
     </div>
 </div>
+    

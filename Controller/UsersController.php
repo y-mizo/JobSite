@@ -130,7 +130,7 @@ class UsersController extends AppController {
 
     // login
     public function login() {
-        $this->layout = "basic";
+        $this->layout = "default";
         if ($this->Auth->user()) {
             return $this->redirect($this->Auth->redirectUrl());
         }

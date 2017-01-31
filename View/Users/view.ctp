@@ -7,8 +7,8 @@
 <h2><?php echo __('About User'); ?></h2>
 <div class="actions">
     <ul class="list-inline text-right">
-        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']), ['class' => 'btn btn-warning btn-info']); ?>
-        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('class' => 'btn btn-primary btn-danger', 'confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
+        <li><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']), ['class' => 'btn btn-warning']); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('class' => 'btn btn-danger', 'confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?></li>
         <!--<li><?php echo $this->Html->link(__('Edit User'), array('action' => 'edit', $user['User']['id'])); ?> </li>-->
         <!--<li><?php echo $this->Form->postLink(__('Delete User'), array('action' => 'delete', $user['User']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $user['User']['id']))); ?> </li>-->
         <!--<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?> </li>-->

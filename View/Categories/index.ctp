@@ -7,26 +7,19 @@
 
 <!--<div class="container">-->
     <div>
-        <h2>ジョブカテゴリ一覧</h2>
+        <h1>お仕事カテゴリ一覧</h1>
         <p>最終更新日時順でソートされます。</p>
-                    <?php // if ($currentUser) : ?>
-                        <?= $this->Html->link(
-                            '追加',
-                            ['action' => 'add']); ?> 
-                    <?php // endif; ?>
+            <?php echo $this->Html->link('お仕事カテゴリを追加', array('action' => 'add'), ['class' => 'btn btn-success']); ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                       <th>id</th>
-                       <th>カテゴリ</th>
-                        
-                        <?php // if ($currentUser) : ?>
-                        <th colspan="2">操作</th>
-                        <?php // endif; ?>
+                        <th>id</th>
+                        <th>カテゴリ</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
-                        <tbody>
+                <tbody>
 
                     <?php foreach ($categories as $category) : ?>
                         <tr>
@@ -35,21 +28,11 @@
                             </td>
                             <td>
                                 <?= $category['Category']['name']; ?>
-                            </td>
-                            
-                            <?php // if ($currentUser) : ?>
-                            
+                            </td>                           
                             <td>
-                                <?= $this->Html->link(
-                                    '編集',
-                                    ['action' => 'edit', $category['Category']['id']]); ?>
+                                <?php echo $this->Html->link('編集', array('action' => 'edit', $category['Category']['id']), ['class' => 'btn btn-warning']); ?>                                    
+                                <?php echo $this->Form->postLink('削除', array('action' => 'delete', $category['Category']['id']), array('class' => 'btn btn-danger', 'confirm' => '本当に削除してもよろしいですか?')); ?>
                             </td>
-                            <td>
-                                <?= $this->Form->postLink(
-                                    '削除',
-                                    ['action' => 'delete', $category['Category']['id']], ['confirm' => '削除します。よろしいですか?']); ?>
-                            </td>
-                            <?php // endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

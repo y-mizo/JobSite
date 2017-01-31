@@ -1,3 +1,3 @@
-<h2>カテゴリ登録</h2>
+<h1>カテゴリ登録</h1>
 <?= $this->element('Categories/form', ['submitLabel' => '登録']); ?>
 
