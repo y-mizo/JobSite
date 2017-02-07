@@ -41,20 +41,24 @@ class JobsController extends AppController {
     
     public function index_front($keyword = null) {
         $this->layout = 'default';
-        $this->set('jobs', $this->Paginator->paginate('Job'));
         
-        if (isset($this->request->query['keyword'])){
-            $keyword = $this->request->query['keyword'];
-
+        $keyword = isset($this->request->query['keyword']) ? trim($this->request->query['keyword']) : '';
+        $conditions = [];
+        
+        if (!empty($keyword)){
             $conditions = [
                 'OR' => [
                     'Job.title LIKE' => '%'. $keyword. '%',
                     'Job.description LIKE' => '%'. $keyword. '%',
-                ]];
-
-            $data = $this->Paginator->paginate('Job', $conditions);
-            $this->set('jobs', $data);
+                    'Category.name LIKE' => '%'. $keyword. '%',               
+                ],
+            ];
         }
+        // pagenate を call
+        $data = $this->Paginator->paginate('Job', $conditions);
+        
+        $this->set('keyword', $keyword);  // 「◯◯の検索結果です」の表示制御の為ビューに渡す
+        $this->set('jobs', $data);
     }
     
     public function view($id = null) {

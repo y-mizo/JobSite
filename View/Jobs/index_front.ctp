@@ -9,8 +9,11 @@
         </form>
     </div>
     <div class="row">
-        <?php if (isset($this->request->query['keyword'])) : ?>
-            <h1><?php echo '『'. $this->request->query['keyword']. '』'. 'の検索結果です'; ?></h1>
+        <?php if (!empty($keyword)) : ?>
+            <h1><?php echo '『'. $keyword. '』'. 'の検索結果です'; ?></h1>
+        <?php else : ?>
+            <h1>登録お仕事一覧</h1>
+            <p>各項目クリックでソートできます。</p>
         <?php endif; ?>
 
         <div class="table-responsive">
