@@ -39,130 +39,22 @@ class JobsController extends AppController {
               
     }
     
-    public function index_front() {
+    public function index_front($keyword = null) {
         $this->layout = 'default';
         $this->set('jobs', $this->Paginator->paginate('Job'));
         
-        
-        
-        
-        
-//        
-//        if ($this->request->is(['post'])){
-////        if (!empty($this->data)) {
-//            $search = $this->data['Search']['keyword'];
-//        } else {
-//            $search = '';
-//        }
-//         
-//        if ($search) {
-//            $conditions = array('OR' => array(
-//                    'Job.title LIKE' => "%{$search}%",
-//                    'Job.description LIKE' => "%{$search}%"
-//            ));
-//        } else {
-//            $conditions = array();
-//        }
-//
-//        $data = $this->paginate($conditions);
-//        $this->set('data', $data);
-        
-        
-        
-        
-        
-        
-        
-//        検索用の設定
-        if ($this->request->is(['post'])){
-//            Formのkeywordの値を取得
-            $keyword = $this->request->data['Search']['keyword'];
-            
-            // ---------------
-//            $keywords = preg_split('/[\s]+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
-//            foreach($keywords as $key){
-//                $conditions[] = "title like '%$key%'";
-//                
-//            };
-//            $data = $this->Paginator->paginate($conditions);
-//     $this->set('jobs',$data);
-            // ---------------
-            // ページネータを使う(タイトル検索のみ)
-//            $this->Paginator->settings = array(
-//                'conditions' => array(
-//                    'title like' => '%' . $keyword . '%'
-//                ));
-//            $data = $this->Paginator->paginate('Job');
-            
-            
-            
-            
-            
-            $this->Paginator->settings = [
-                'limit' => 10,
-                'conditions' => [
-                    'OR' => [
-                        'Job.title LIKE' => '%'. $keyword. '%',
-                        'Job.description LIKE' => '%'. $keyword. '%',
-                    ],
+        if (isset($this->request->query['keyword'])){
+            $keyword = $this->request->query['keyword'];
+
+            $conditions = [
+                'OR' => [
+                    'Job.title LIKE' => '%'. $keyword. '%',
+                    'Job.description LIKE' => '%'. $keyword. '%',
                 ]];
-//                
-//            $this->request->params['named']['page'] = 1;
-//            
-//            
-//            
-//            
-//            
-//            $data = $this->Paginator->paginate('Job');
-//                      echo $this->Session->write('keyword', $keyword); exit;
-                      
-//            $this->set('keyword', $keyword);
-//            $this->request->params['named']['page'] = 1;  
-            
-            // findで2カラム中から検索      
-//            $data = $this->Job->find('all', [
-//                'conditions' => [
-//                    'OR' => [
-//                        'Job.title LIKE' => '%'. $keyword. '%',
-//                        'Job.description LIKE' => '%'. $keyword. '%',
-//                    ],
-//                ]
-//            ]);
-//              $data = $this->Session->read('keyword');
-//              
-//              
-//              
-            // 上でsetしたのと同じように jobs にsetすることで一覧で表示できる。
-            $this->set('jobs', $this->Paginator->paginate('Job'));
-            
-            
-            
-            
-//            if ($this->request->is('post')) {
-//            $keyword = $this->request->data['Search']['keyword'];
-//            $this->Session->write('keyword', $keyword);
-//            $this->set('keyword', $keyword);
-//            $this->request->params['named']['page'] = 1;
-//
-//            if ($keyword == '0') {
-//                $this->set('jobs', $this->Paginator->paginate('Job'));
-//            } else {
-//                $this->set('jobs', $this->Paginator->paginate('Job'));
-//            }
-//        } else { //post処理以外(フィルターを使ったとき以外)
-//            if($this->Session->check('keyword')) {
-//                $keyword = $this->Session->read('keyword');
-//                if ($keyword == '0') {
-//                    $this->set('jobs', $this->Paginator->paginate('Job'));
-//                } else { 
-//                    $this->set('jobs', $this->Paginator->paginate('Job'));
-//                }
-//            } else {
-//                $this->set('jobs', $this->Paginator->paginate('Job'));
-//            }
-//        }
-//        }
-    }
+
+            $data = $this->Paginator->paginate('Job', $conditions);
+            $this->set('jobs', $data);
+        }
     }
     
     public function view($id = null) {
