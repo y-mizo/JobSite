@@ -3,6 +3,7 @@
 
 <div class="container">
     <div class="row" style="text-align: right">
+        <p>▼ キーワードから探す</p>
         <form action = "<?= $this->Html->url(['action' => 'index_front']); ?>" class="form-inline" method="get">
             <div class="form-group"><input type="text" name="keyword" class="form-control"></div>
             <div class="form-group"><input type="submit" value="検索" class="form-control btn btn-primary"></div>
@@ -10,11 +11,11 @@
     </div>
     <div class="row">
         <?php if (!empty($keyword)) : ?>
-            <h1><?php echo '『'. $keyword. '』'. 'の検索結果です'; ?></h1>
-        <?php else : ?>
-            <h1>登録お仕事一覧</h1>
-            <p>各項目クリックでソートできます。</p>
+        <h1 style="text-align: center"><mark><?php echo '『'. $keyword. '』'. 'の検索結果です'; ?></mark></h1>
         <?php endif; ?>
+            
+        <h1>登録お仕事一覧</h1>
+        <p>各項目クリックでソートできます。</p>
 
         <div class="table-responsive">
             <table class="table table-striped">
