@@ -23,7 +23,7 @@ class JobEntriesController extends AppController {
     
     // エントリー
     public function entry($id = null) {
-        $this->layout = 'front';
+        $this->layout = 'default';
         
         // 仕事情報を読み込み
         if (!$this->Job->exists($id)) {
@@ -60,7 +60,7 @@ class JobEntriesController extends AppController {
     }
     
     public function entry_confirm($id = null) {
-        $this->layout = 'front';
+        $this->layout = 'default';
         
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
@@ -93,7 +93,7 @@ class JobEntriesController extends AppController {
     }
     
     public function entry_complete() {
-        $this->layout = 'front';
+        $this->layout = 'default';
         // セッションが空ならリダイレクト
         if (!$this->Session->read('data')) {
             $this->redirect(array('action' => 'entry'));

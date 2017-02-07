@@ -1,6 +1,5 @@
-<head>
-    <title>
-        <?php $this->assign('title', 'admin page top'); ?>
-    </title>
-</head>
-<h2>WELCOME to Admin Page</h2>
+<?php $this->assign('title', '管理画面'); ?>
+
+<h1>管理画面</h1>
+<p>サイトデータの確認・編集ができます。</p>
+<p>左のメニューから選んでください。</p>

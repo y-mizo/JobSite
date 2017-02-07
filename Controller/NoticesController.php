@@ -31,7 +31,7 @@ class NoticesController extends AppController {
     }
     
     public function index_front() {
-        $this->layout = 'front';
+        $this->layout = 'default';
         $this->set('notices', $this->Paginator->paginate());
         
     }
@@ -50,7 +50,7 @@ class NoticesController extends AppController {
     }
     
     public function view_front($id = null) {
-            $this->layout = 'front';
+            $this->layout = 'default';
         if (!$this->Notice->exists($id)) {
             throw new NotFoundException('お知らせは見つかりません');
         }

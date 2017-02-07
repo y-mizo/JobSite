@@ -1,4 +1,10 @@
-<h2>おしごと詳細</h2>
+<h1>お仕事の詳細</h1>
+<div class="actions">
+    <ul class="list-inline text-right">
+        <li><?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $job['Job']['id']), ['class' => 'btn btn-warning']); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $job['Job']['id']), array('class' => 'btn btn-danger', 'confirm' => '本当に削除してもよろしいですか?')); ?></li>
+    </ul>
+</div>
 
 <div class="table-responsive">
             <table class="table table-striped">

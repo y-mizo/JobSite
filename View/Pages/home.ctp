@@ -1,20 +1,20 @@
+<?php $this->assign('title', 'トップページ'); ?>
+
 <?php $this->start('css'); ?>
-<style>
-    header.jumbotron {
-        background: url("../img/main.jpg");}
-</style>
-<?= $this->Html->css('top'); ?>
-
+    <style>
+        header.jumbotron {
+            background: url("../img/main.jpg");
+        }
+    </style>
 <?php $this->end(); ?>
 
-
-<?php $this->assign('title', 'Top'); ?>
-<?php $this->start('title_area'); ?>
-<h1>SiteBase</h1>
-<p>ログインを必要とするサイトの雛形サイト(お知らせページつき)</p>
-<?php $this->end(); ?>
-
-
+<header class="jumbotron top">
+    <div class="container">
+        <h1>JobSite</h1>
+        <p>お仕事検索サイト</p>
+    </div>
+</header>
+    
 <div class="container marketing">
     <!--Three columns of text below the carousel--> 
     <div class="row">
@@ -38,6 +38,4 @@
         </div> <!--/.col-lg-4--> 
         
     </div> <!--/.row--> 
-
-<?php $this->end(); ?>
 

@@ -10,17 +10,11 @@
 
 <!--<div class="container">-->
     <div>
-        <h2>おしごと一覧</h2>
-        <p>最終更新日時順でソートされます。</p>
-
-        
-        
-        
-                    <?php if ($currentUser) : ?>
-                        <?= $this->Html->link(
-                            '追加',
-                            ['action' => 'add']); ?> 
-                    <?php endif; ?>
+        <h1>登録お仕事一覧</h1>
+        <p>最終更新日時順でソートされます。</p>       
+            <?php if ($currentUser) : ?>
+                <?php echo $this->Html->link('お仕事を追加', array('action' => 'add'), ['class' => 'btn btn-success']); ?>
+            <?php endif; ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -29,14 +23,12 @@
                         <th>最終更新日</th>
                         <th>カテゴリ</th>
                         <th>タイトル</th>
-                        <th>内容</th>
                         <?php if ($currentUser) : ?>
-                        <th colspan="3">操作</th>
+                        <th>操作</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
-                        <tbody>
-
+                <tbody>
                     <?php foreach ($jobs as $job) : ?>
                         <tr>
                             <td>
@@ -52,23 +44,13 @@
                             <td>
                                 <?= $job['Job']['title']; ?>
                             </td>
-                            <?php if ($currentUser) : ?>
-                            <td>
-                                <?= $this->Html->link(
-                                    '詳細',
-                                    ['action' => 'view', $job['Job']['id']]); ?>
+                            <td class="actions">
+                                <?php if ($currentUser) : ?>
+                                    <?php echo $this->Html->link('詳細', array('action' => 'view', $job['Job']['id']), ['class' => 'btn btn-info']); ?>
+                                    <?php echo $this->Html->link('編集', array('action' => 'edit', $job['Job']['id']), ['class' => 'btn btn-warning']); ?>                                    
+                                    <?php echo $this->Form->postLink('削除', array('action' => 'delete', $job['Job']['id']), array('class' => 'btn btn-danger', 'confirm' => '本当に削除してもよろしいですか?')); ?>
+                                <?php endif; ?>
                             </td>
-                            <td>
-                                <?= $this->Html->link(
-                                    '編集',
-                                    ['action' => 'edit', $job['Job']['id']]); ?>
-                            </td>
-                            <td>
-                                <?= $this->Form->postLink(
-                                    '削除',
-                                    ['action' => 'delete', $job['Job']['id']], ['confirm' => '削除します。よろしいですか?']); ?>
-                            </td>
-                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

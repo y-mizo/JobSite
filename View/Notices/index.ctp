@@ -7,13 +7,11 @@
 
 <!--<div class="container">-->
     <div>
-        <h2>お知らせ一覧</h2>
+        <h1>お知らせ一覧</h1>
         <p>お知らせは最終更新日時順でソートされます。</p>
-                    <?php if ($currentUser) : ?>
-                        <?= $this->Html->link(
-                            '追加',
-                            ['action' => 'add']); ?> 
-                    <?php endif; ?>
+            <?php if ($currentUser) : ?>
+                <?php echo $this->Html->link('お知らせを追加', array('action' => 'add'), ['class' => 'btn btn-success']); ?>
+            <?php endif; ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -22,7 +20,7 @@
                         <th>最終更新日</th>
                         <th>タイトル</th>
                         <?php if ($currentUser) : ?>
-                        <th colspan="3">操作</th>
+                        <th>操作</th>
                         <?php endif; ?>
                     </tr>
                 </thead>
@@ -40,23 +38,13 @@
                             <td>
                                 <?= $notice['Notice']['subject']; ?>
                             </td>
+                            <td class="actions">
                             <?php if ($currentUser) : ?>
-                            <td>
-                                <?= $this->Html->link(
-                                    '詳細',
-                                    ['action' => 'view', $notice['Notice']['id']]); ?>
-                            </td>
-                            <td>
-                                <?= $this->Html->link(
-                                    '編集',
-                                    ['action' => 'edit', $notice['Notice']['id']]); ?>
-                            </td>
-                            <td>
-                                <?= $this->Form->postLink(
-                                    '削除',
-                                    ['action' => 'delete', $notice['Notice']['id']], ['confirm' => '削除します。よろしいですか?']); ?>
-                            </td>
+                                <?php echo $this->Html->link('詳細', array('action' => 'view', $notice['Notice']['id']), ['class' => 'btn btn-info']); ?>
+                                <?php echo $this->Html->link('編集', array('action' => 'edit', $notice['Notice']['id']), ['class' => 'btn btn-warning']); ?>                                    
+                                <?php echo $this->Form->postLink('削除', array('action' => 'delete', $notice['Notice']['id']), array('class' => 'btn btn-danger', 'confirm' => '本当に削除してもよろしいですか?')); ?>
                             <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

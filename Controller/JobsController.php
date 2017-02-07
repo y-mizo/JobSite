@@ -39,23 +39,26 @@ class JobsController extends AppController {
               
     }
     
-    public function index_front() {
-        $this->layout = 'front';
-        $this->set('jobs', $this->Paginator->paginate('Job'));
+    public function index_front($keyword = null) {
+        $this->layout = 'default';
         
-        //検索用の設定
-        if ($this->request->is(['post', 'put'])){
-            //Formのtitleの値を取得
-            $title = $this->request->data['Search']['title'];
-
-            $this->Paginator->settings = array(
-                'conditions' => array(
-                    'title like' => '%'.$title.'%')
-                );
-            $data = $this->Paginator->paginate('Job');
-            // 上でsetしたのと同じように jobs にsetすることで一覧で表示できる。
-            $this->set('jobs',$data);
+        $keyword = isset($this->request->query['keyword']) ? trim($this->request->query['keyword']) : '';
+        $conditions = [];
+        
+        if (!empty($keyword)){
+            $conditions = [
+                'OR' => [
+                    'Job.title LIKE' => '%'. $keyword. '%',
+                    'Job.description LIKE' => '%'. $keyword. '%',
+                    'Category.name LIKE' => '%'. $keyword. '%',               
+                ],
+            ];
         }
+        // pagenate を call
+        $data = $this->Paginator->paginate('Job', $conditions);
+        
+        $this->set('keyword', $keyword);  // 「◯◯の検索結果です」の表示制御の為ビューに渡す
+        $this->set('jobs', $data);
     }
     
     public function view($id = null) {
@@ -68,7 +71,7 @@ class JobsController extends AppController {
     }
     
     public function view_front($id = null) {
-        $this->layout = 'front';
+        $this->layout = 'default';
         if (!$this->Job->exists($id)) {
             throw new NotFoundException('見つかりません');
         }
@@ -131,10 +134,10 @@ class JobsController extends AppController {
         
     }
     
-    public function search() {
-        $this->layout = 'front';
-        
-    }
+//    public function search() {
+//        $this->layout = 'default';
+//        
+//    }
 
     // ---------- private --------------
     

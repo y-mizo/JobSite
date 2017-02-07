@@ -36,7 +36,6 @@ class PagesController extends AppController {
      *   or MissingViewException in debug mode.
      */
     public function display() {
-        $this->layout ="front";
         $path = func_get_args();
 
         $count = count($path);
@@ -68,6 +67,7 @@ class PagesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->layout ="default";
         $this->Auth->allow(['controller' => 'pages', 'action' => 'display']);
     }
 }

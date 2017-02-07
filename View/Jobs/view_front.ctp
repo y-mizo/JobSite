@@ -1,6 +1,8 @@
+<?php $this->assign('title', 'お仕事情報詳細'); ?>
+<?php echo $this->element('Jobs/header-setting'); ?>
 
 <div class="container table-responsive">
-    <h2>おしごと詳細</h2>
+    <h1>お仕事の詳細</h1>
     <table class="table table-striped">
 <!--style="width: 50%;"-->
         <tr>
@@ -25,5 +27,6 @@
         </tr>
 
     </table>
-    <?php echo $this->Html->link('エントリーする', ['controller' => 'JobEntries', 'action' => 'entry', $job['Job']['id'], 'label' => false]); ?>
+    <p class="list-inline text-center">
+    <?php echo $this->Html->link('このお仕事にエントリーする', ['controller' => 'JobEntries', 'action' => 'entry', $job['Job']['id']], ['class' => 'btn btn-success btn-lg']); ?></p>
 </div>

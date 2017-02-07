@@ -1,45 +1,33 @@
-<?php $this->assign('title', 'Jobs index'); ?>
-<?php $this->start('css'); ?>
-<style>
-    header.jumbotron {
-        background-color: green;
-        /*background: url("../img/p2.jpg");*/
-    }
-</style>
-<?= $this->Html->css('pages'); ?>
-<?php $this->end(); ?>
+<?php $this->assign('title', 'お仕事情報'); ?>
+<?php echo $this->element('Jobs/header-setting'); ?>
 
-<?php $this->start('title_area'); ?>
-<h2>Jobs</h2>
-<?php $this->end(); ?>
-
-
-<!--<div class="container">-->
-<!--    <div>-->
 <div class="container">
+    <div class="row" style="text-align: right">
+        <p>▼ キーワードから探す</p>
+        <form action = "<?= $this->Html->url(['action' => 'index_front']); ?>" class="form-inline" method="get">
+            <div class="form-group"><input type="text" name="keyword" class="form-control"></div>
+            <div class="form-group"><input type="submit" value="検索" class="form-control btn btn-primary"></div>
+        </form>
+    </div>
     <div class="row">
-        <?php if ($this->request->data) : ?>
-        <h1 style="text-align: center"><?php echo '※検索結果の一覧です※'; ?></h1>
+        <?php if (!empty($keyword)) : ?>
+        <h1 style="text-align: center"><mark><?php echo '『'. $keyword. '』'. 'の検索結果です'; ?></mark></h1>
         <?php endif; ?>
-        <h2>おしごと一覧</h2>
-        <p>最終更新日時順でソートされます。</p>
-        <p><?= $this->Html->link(
-                'お仕事検索はこちら',
-                ['action' => 'search']); ?></p>
+            
+        <h1>登録お仕事一覧</h1>
+        <p>各項目クリックでソートできます。</p>
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>掲載日</th>
-                        <th>最終更新日</th>
-                        <th>カテゴリ</th>
-                        <th>タイトル</th>
-                        <th>内容</th>
-                        
+                        <th><?php echo $this->Paginator->sort('created', '掲載日'); ?></th>
+                        <th><?php echo $this->Paginator->sort('modified', '修正日'); ?></th>
+                        <th><?php echo $this->Paginator->sort('category_id', 'カテゴリ'); ?></th>
+                        <th><?php echo $this->Paginator->sort('title', 'タイトル'); ?></th>
                     </tr>
                 </thead>
-                        <tbody>
-
+                <tbody>
                     <?php foreach ($jobs as $job) : ?>
                         <tr>
                             <td>
@@ -53,30 +41,24 @@
                                 <?= $job['Category']['name']; ?>
                             </td>
                             <td>
-                                <?= $job['Job']['title']; ?>
-                            </td>
-                            <td>
                                 <?= $this->Html->link(
-                                    '詳細',
+                                    $job['Job']['title'],
                                     ['action' => 'view_front', $job['Job']['id']]); ?>
                             </td>
-                            
                         </tr>
-                        
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-        
+
             <!-- <?php
             echo $this->Paginator->counter(array(
                 'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
             ));
             ?> -->
         <div style="text-align: center">
-            <?php if (!$this->request->data) : ?>
-                <?= $this->element('pagination'); ?>         
-            <?php endif; ?>
-        </div> 
+                <?= $this->element('pagination'); ?>
+        </div>
     </div>
 </div>
+

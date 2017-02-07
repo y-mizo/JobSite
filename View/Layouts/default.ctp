@@ -15,24 +15,22 @@
         echo $this->Html->css('bootstrap.min');
         echo $this->Html->css('sticky-footer-navbar');
         echo $this->Html->css('default');
-        echo $this->Html->css('admin');
+        echo $this->Html->css('front');
         
         echo $this->Html->script('jquery.min');
         echo $this->Html->script('bootstrap.min');
         ?>
     </head>
-    <body>      
-        <?php echo $this->element('Admins/navbar'); ?>
-    <div class="content">
-        <?php echo $this->Session->flash(); ?>
-        <div class="col-md-2 sidebar">
-                <?php echo $this->element('Admins/sidebar'); ?>
-            </div>
-            <div class="col-md-10 main">
-                <?php echo $this->fetch('content'); ?>
-            </div>
-    </div>
-    <?php echo $this->element('footer'); ?>
-    <?php echo $this->element('sql_dump'); ?>
-</body>
+    <body>
+        <!--navbar-->
+        <?php echo $this->element('navbar'); ?>
+
+        <div id="content">
+            <?php echo $this->Session->flash(); ?>
+            <?php echo $this->fetch('content'); ?>
+        </div>
+
+        <?php echo $this->element('footer'); ?>
+        <?php echo $this->element('sql_dump'); ?>
+    </body>
 </html>
