@@ -26,6 +26,17 @@
             <td><?= h($job['Job']['title']); ?></td>
         </tr>
         <tr>
+            <td><strong>応募要項</strong></td>
+            <td><?= h($job['Job']['requirement']); ?></td>
+        </tr>
+        <tr>
+            <td><strong>勤務地</strong></td>
+            <td><?= h($job['Job']['location']); ?></td>
+        <tr>
+            <td><strong>年収</strong></td>
+            <td><?= h($job['Job']['income']); ?></td>
+        </tr>
+        <tr>
             <td><strong>内容</strong></td>
             <td><?= $job_description; ?></td>
         </tr>
