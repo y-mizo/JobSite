@@ -23,9 +23,21 @@ $ cd JobSite
 $ composer install
 ```
 
+## tmpディレクトリの作成
+tmpディレクトリを下記構成で作る。
+```
+tmp
+├── cache
+│   ├── models
+│   └── persistent
+└── logs
+    ├── debug.log
+    └── error.log
+```
+
 ## データベースのセットアップ
 ※ 事前に MySQL 内に空のデータベースを作成しておく。
-  照合順序は utf8_general_ci 。
+  文字コードは UTF8 。
 
 ▼ database.php ファイルを作成
 ```
