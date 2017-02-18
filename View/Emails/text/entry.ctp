@@ -3,10 +3,10 @@ SiteBaseご利用者様より、下記内容でエントリー希望が来てい
 
 -------------------------------------
 
-仕事id:<?php echo $id; ?>
+仕事id:<?php echo h($id); ?>
 
-仕事タイトル:<?php echo $title; ?>
+仕事タイトル:<?php echo h($title); ?>
 
-お名前：<?php echo $name; ?>
+お名前：<?php echo h($name); ?>
  
-メールアドレス：<?php echo $email; ?>
+メールアドレス：<?php echo h($email); ?>

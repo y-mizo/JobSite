@@ -8,7 +8,6 @@
 <!--<div class="container">-->
     <div>
         <h1>お仕事カテゴリ一覧</h1>
-        <p>最終更新日時順でソートされます。</p>
             <?php echo $this->Html->link('お仕事カテゴリを追加', array('action' => 'add'), ['class' => 'btn btn-success']); ?>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -24,10 +23,10 @@
                     <?php foreach ($categories as $category) : ?>
                         <tr>
                             <td>
-                                <?= $category['Category']['id']; ?>
+                                <?= h($category['Category']['id']); ?>
                             </td>
                             <td>
-                                <?= $category['Category']['name']; ?>
+                                <?= h($category['Category']['name']); ?>
                             </td>                           
                             <td>
                                 <?php echo $this->Html->link('編集', array('action' => 'edit', $category['Category']['id']), ['class' => 'btn btn-warning']); ?>                                    

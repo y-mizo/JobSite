@@ -15,12 +15,14 @@
 </header>
 
 <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
     <h1><?= $notice['Notice']['subject']; ?></h1>
     <div class="table-responsive">
         <table class="table table-striped">
             <!--style="width: 50%;"-->
             <tr>
-                <td><strong>掲載日</strong></td>
+                <td style="width: 20%"><strong>掲載日</strong></td>
                 <td><?= h($notice['Notice']['created']); ?></td>
             </tr>
             <tr>
@@ -33,4 +35,6 @@
             </tr>
         </table>
     </div>
+</div>
+            </div>
 </div>

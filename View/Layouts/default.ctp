@@ -16,6 +16,7 @@
         echo $this->Html->css('sticky-footer-navbar');
         echo $this->Html->css('default');
         echo $this->Html->css('front');
+        echo $this->Html->css('font-awesome.min');
         
         echo $this->Html->script('jquery.min');
         echo $this->Html->script('bootstrap.min');

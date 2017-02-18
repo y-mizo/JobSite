@@ -20,8 +20,8 @@ class NoticesController extends AppController {
     
     public $components = [
         'Paginator' => [
-            'limit' => 5,
-            'order' => ['modified' => 'desc']
+            'limit' => 3,
+            'order' => ['created' => 'desc']
         ]
     ];
     
@@ -33,7 +33,10 @@ class NoticesController extends AppController {
     public function index_front() {
         $this->layout = 'default';
         $this->set('notices', $this->Paginator->paginate());
-        
+//        $notice_body = nl2br($notice['Notice']['body']);
+//        var_dump($notices); exit;
+//        $notice = $this->Notice->findById($id);
+//                $this->set('notice_body', nl2br($notice[['Notice']['body']]));
     }
     
     public function view($id = null) {
@@ -44,7 +47,7 @@ class NoticesController extends AppController {
 //        echo var_dump($notice); 
 //        echo nl2br($notice['Notice']['body']);
 //        exit;
-        $this->set('notice_body', nl2br($notice['Notice']['body']));  // 改行表示
+        $this->set('notice_body', nl2br(h($notice['Notice']['body'])));  // 改行表示
         $this->set('notice', $notice);
         
     }
@@ -55,7 +58,7 @@ class NoticesController extends AppController {
             throw new NotFoundException('お知らせは見つかりません');
         }
         $notice = $this->Notice->findById($id);
-        $this->set('notice_body', nl2br($notice['Notice']['body']));  // 改行表示
+        $this->set('notice_body', nl2br(h($notice['Notice']['body'])));  // 改行表示
         $this->set('notice', $notice);
         
     }
