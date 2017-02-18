@@ -2,7 +2,7 @@
 
     <div class="navbar-header">
         <!--Logo-->
-        <a class="navbar-brand" href="/">JobSite</a>
+        <a class="navbar-brand" href="http://mizo.xsrv.jp/JobSite/">BOOKWORK</a>
         <!--toggle button-->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-content">
             <span class="icon-bar"></span>

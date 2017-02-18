@@ -8,7 +8,6 @@
 <!--<div class="container">-->
     <div>
         <h1>お知らせ一覧</h1>
-        <p>お知らせは最終更新日時順でソートされます。</p>
             <?php if ($currentUser) : ?>
                 <?php echo $this->Html->link('お知らせを追加', array('action' => 'add'), ['class' => 'btn btn-success']); ?>
             <?php endif; ?>
@@ -29,14 +28,14 @@
                     <?php foreach ($notices as $notice) : ?>
                         <tr>
                             <td>
-                                <?= $this->Time->format($notice['Notice']['created'], '%Y/%m/%d'); ?>
+                                <?= $this->Time->format(h($notice['Notice']['created']), '%Y/%m/%d'); ?>
                             </td>
 
                             <td>
-                                <?= $this->Time->format($notice['Notice']['modified'], '%Y/%m/%d'); ?>
+                                <?= $this->Time->format(h($notice['Notice']['modified']), '%Y/%m/%d'); ?>
                             </td>
                             <td>
-                                <?= $notice['Notice']['subject']; ?>
+                                <?= h($notice['Notice']['subject']); ?>
                             </td>
                             <td class="actions">
                             <?php if ($currentUser) : ?>

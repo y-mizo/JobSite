@@ -43,9 +43,9 @@ class ContactsController extends AppController {
 
         if ($this->request->is('post')) {
             //セッションの情報を取得
-            $content = ['name' => $data['Contact']['name'],
-                'email' => $data['Contact']['email'],
-                'body' => $data['Contact']['body']];
+            $content = ['name' => h($data['Contact']['name']),
+                'email' => h($data['Contact']['email']),
+                'body' => h($data['Contact']['body'])];
             // ここでメール送信
             $Email = new CakeEmail('gmail');
             // 管理者用

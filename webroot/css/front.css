@@ -1,11 +1,30 @@
+body {
+    background-image: url(../img/readers2.jpg);
+    /*background-color: yellow;*/
+    background-size:cover;
+    background-attachment:fixed; 
+    font-family:Avenir , "Open Sans" , "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
+}
+
+/*a {
+color: black;
+}*/
+
+.jumbotron {
+    background-color: transparent;
+}
+
 header.jumbotron {
     background-position: center center;
     background-size: cover;
-    color: #fff;
+    color: white;
 }
 
 header.jumbotron.top {
-    padding-top: 200px;
+    /*margin-top: -50px;*/
+    padding-top: 80px;
+    padding-bottom: 0px;
+    color: black;
 }
 
 .row.page {
@@ -15,5 +34,19 @@ header.jumbotron.top {
 
 .col-md-9.content-area {
     padding-left: 50px;
-    /*padding-right: 50px;*/
+    padding-right: 50px;
+}
+
+.navbar{
+    color: black;
+    border-radius: 0;
+    border: none;
+    /*background-color: #FAF0E6;*/
+    /*background-color: rgba(0,0,0,0.8);*/
+}
+
+.container-fluid.news {
+    background-image: url(../img/bg.jpg);
+    background-size: 100%;
+    /*height: 100%;*/
 }

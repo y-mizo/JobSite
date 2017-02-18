@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td><strong>タイトル</strong></td>
-            <td><?= $notice['Notice']['subject']; ?></td>
+            <td><?= h($notice['Notice']['subject']); ?></td>
         </tr>
         <tr>
             <td><strong>内容</strong></td>

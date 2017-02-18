@@ -1,13 +1,13 @@
 <?php $this->assign('title', 'お知らせ'); ?>
 
 <?php $this->start('css'); ?>
-    <style>
-        header.jumbotron {
-            background-color: orange;
-        }
-    </style>
+<style>
+    header.jumbotron {
+        background-color: #FF8856;
+    }
+</style>
 <?php $this->end(); ?>
-    
+
 <header class="jumbotron">
     <div class="container">
         <h1>Notices</h1>
@@ -16,45 +16,30 @@
 
 <div class="container">
     <div class="row">
-        <h1>お知らせ一覧</h1>
-        <p>お知らせは最終更新日時順でソートされます。</p>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>掲載日</th>
-                        <th>最終更新日</th>
-                        <th>タイトル</th>
+        <div class="col-sm-12">
+            <?php foreach ($notices as $notice) : ?>
 
-                    </tr>
-                </thead>
-                <tbody>
+                <p><?= $this->Time->format(h($notice['Notice']['created']), '%Y/%m/%d'); ?></p>
 
-                    <?php foreach ($notices as $notice) : ?>
-                        <tr>
-                            <td>
-                                <?= $this->Time->format($notice['Notice']['created'], '%Y/%m/%d'); ?>
-                            </td>
+                <?php // echo $this->Time->format($notice['Notice']['modified'], '%Y/%m/%d'); ?>
 
-                            <td>
-                                <?= $this->Time->format($notice['Notice']['modified'], '%Y/%m/%d'); ?>
-                            </td>
-                            <td>
-                                <?= $this->Html->link(
-                                    $notice['Notice']['subject'],
-                                    ['action' => 'view_front', $notice['Notice']['id']]); ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+                <?php
+                // echo $this->Html->link(
+//                                    $notice['Notice']['subject'],
+//                                    ['action' => 'view_front', $notice['Notice']['id']]); 
+                ?>
+
+                <p style="font-size: 20px"><strong><?= $notice['Notice']['subject']; ?></strong></p>
+
+                <p><?= nl2br(h($notice['Notice']['body'])) ?></p><br><br>
+
+            <?php endforeach; ?>
 
 
-        <div style="text-align: center">                         
+            <div style="text-align: center">                         
             <?= $this->element('pagination'); ?>                                        
-        </div> 
+            </div> 
 
-
+        </div>
     </div>
 </div>

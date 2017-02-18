@@ -10,7 +10,7 @@ class JobsController extends AppController {
     public $components = [
         'Session',
         'Paginator' => [
-            'limit' => 5,
+            'limit' => 3,
             'order' => ['modified' => 'desc']
         ]
     ];
@@ -76,7 +76,7 @@ class JobsController extends AppController {
             throw new NotFoundException('見つかりません');
         }
         $job = $this->Job->findById($id);
-        $this->set('job_description', nl2br($job['Job']['description']));  // 改行表示
+        $this->set('job_description', nl2br(h($job['Job']['description'])));  // 改行表示
         $this->set('job', $job);
     }
     

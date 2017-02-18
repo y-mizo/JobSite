@@ -3,9 +3,9 @@ SiteBaseご利用者様より、下記内容でお問い合せが来ています
 
 -------------------------------------
  
-お名前：<?php echo $name; ?>
+お名前：<?php echo h($name); ?>
  
-メールアドレス：<?php echo $email; ?>
+メールアドレス：<?php echo h($email); ?>
 
 お問い合わせの内容：
-<?php echo $body; ?>
+<?php echo h($body); ?>

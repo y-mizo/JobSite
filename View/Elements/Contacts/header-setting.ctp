@@ -1,7 +1,7 @@
 <?php $this->start('css'); ?>
     <style>
         header.jumbotron {
-            background-color: green;
+            background-color: #FFCC66;
         }
     </style>
 <?php $this->end(); ?>

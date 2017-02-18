@@ -26,7 +26,7 @@ class PagesController extends AppController {
      *
      * @var array
      */
-    public $uses = array();
+    public $uses = ['Page', 'Job'];
 
     /**
      * Displays a view
@@ -64,10 +64,22 @@ class PagesController extends AppController {
             throw new NotFoundException();
         }
     }
+    
+    public function top($id = null) {
+        $conditions = [
+            'limit' => 3,
+            'order' => [
+                'Job.created' => 'desc'
+            ]
+        ];
+        
+        $jobs = $this->Job->find('all', $conditions);
+        $this->set('jobs', $jobs);
+    }
 
     public function beforeFilter() {
         parent::beforeFilter();
         $this->layout ="default";
-        $this->Auth->allow(['controller' => 'pages', 'action' => 'display']);
+        $this->Auth->allow('display', 'top');
     }
 }

@@ -37,10 +37,33 @@ class CreateJobsTable extends CakeMigration {
                         'default' => null,
                         'length' => 255,
                     ],
+                    'company_name' => [
+                        'type' => 'string',
+                        'null' => false,
+                        'default' => null,
+                        'length' => 255,
+                    ],
                     'description' => [
                         'type' => 'text',
                         'null' => false,
                         'default' => null,
+                    ],
+                    'requirement' => [
+                        'type' => 'text',
+                        'null' => false,
+                        'default' => null,
+                    ],
+                    'location' => [
+                        'type' => 'string',
+                        'null' => false,
+                        'default' => null,
+                        'length' => 255,
+                    ],
+                    'income' => [
+                        'type' => 'string',
+                        'null' => false,
+                        'default' => null,
+                        'length' => 255,
                     ],
                     'created' => [
                         'type' => 'datetime'
@@ -56,6 +79,7 @@ class CreateJobsTable extends CakeMigration {
                 'jobs'
             ]
         ],
+        
     ];
 
     /**
