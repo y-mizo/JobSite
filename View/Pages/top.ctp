@@ -15,7 +15,7 @@
 
 <header class="jumbotron top">
     <div class="container">
-        <img src="../img/bookb.png" style="width: 50%">
+        <img src="http://mizo.xsrv.jp/JobSite/webroot/img/bookb.png" style="width: 50%">
         <h1><span><strong>本と、はたらく。</strong></span></h1>
         <p><span style="border-bottom:solid 5px red;"><strong>本好きの人のための求人サイト</strong></span></p>
         <!--style="background-color:black"-->
