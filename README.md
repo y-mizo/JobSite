@@ -4,13 +4,15 @@
 
 ![概要](https://raw.githubusercontent.com/y-mizo/JobSite/master/webroot/img/job_site.png)
 
+[デモサイトはこちら](http://jobsite.unateco.com/)
+
 求人サイト向けの雛形サイト。  
 XAMPP環境、CakePHP2.8.* で作成。
 
 * 求人管理は管理者以外の一般登録ユーザーも行えるものとする。
 * 求人カテゴリの管理は管理者のみ可能とする。
-* キーワードから仕事を検索、フォームからエントリーする。
-  管理者と利用者の双方に自動連絡メールが送信される。
+* キーワードから仕事を検索、フォームからエントリーする。  
+管理者と利用者の双方に自動連絡メールが送信される。
 
 ## 要件
 * PHP 5.6 以上
@@ -81,6 +83,3 @@ $ Console/cake server -p 8000
 ...
 built-in server is running in http://YOUR_HOSTNAME:8000/
 ```
-
-
-
